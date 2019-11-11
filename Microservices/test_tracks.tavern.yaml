@@ -1,0 +1,59 @@
+#Test for making Post call on tracks service
+test_name: Post a track and its description
+stages:
+  - name: post
+    request:
+      url: http://localhost:9002/recources/tracks
+      json:
+        track_title: Shape of you
+        album_title: shape of you
+        artist: Aleckie
+        track_length: "2.30"
+        URL_media: night.co
+      method: POST
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
+
+#Test a GET call to get a single exisiting track with id
+test_name: retrieve existing track with id=1
+stages:
+  - name: get
+    request:
+      url: http://localhost:9002/recources/tracks/1
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+
+#Test PUT api verb to modify/update values of a user: (Password change operation)
+test_name: Change / modify an existing track with id=3
+stages:
+  - name: change
+    request:
+      url: http://localhost:9002/recources/tracks/2
+      method: PUT
+      json:
+        track_title: dummytrack
+        album_title: dummytrack
+        artist: Aleckie
+        track_length: "2"
+        URL_media: dummy.com
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
+
+#Test Delete verb to delete an existing user
+test_name: delete track with id=4
+stages:
+  - name: delete
+    request:
+      url: http://localhost:9002/recources/tracks/2
+      method: DELETE
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200

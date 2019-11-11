@@ -1,0 +1,27 @@
+#This yaml file runs test to test Description microservice apis
+#A basic test for POST call, posts a track description in database
+test_name: Set track description
+stages:
+  - name: set
+    request:
+      url: http://localhost:9001/api/users/settrackdesc
+      json:
+        trackurl: track123
+        username: Aleckie
+        description: google.com
+      method: POST
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
+
+test_name: Get description
+stages:
+  - name: get description
+    request:
+      url: http://localhost:9001/api/users/gettrackdesc/Aleckie/track123
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200

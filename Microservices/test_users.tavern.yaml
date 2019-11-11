@@ -1,0 +1,78 @@
+#This yaml file tests User microservice apis
+#A basic test for GET call, gets all existing users in database
+# test_name: retrieve all users
+# stages:
+#   - name: post
+#     request:
+#       url: http://localhost:9000/api/users/all
+#       method: GET
+#       headers:
+#         content-type: application/json
+#     response:
+#       status_code: 200
+#
+# #Test a GET call to get a single exisiting user with params=userid
+# test_name: retrieve existing single user
+# stages:
+#   - name: post
+#     request:
+#       url: http://localhost:9000/api/users/Aleckie
+#       method: GET
+#       headers:
+#         content-type: application/json
+#     response:
+#       status_code: 200
+
+#Test case to POST -To create a new user with id=abc2019
+test_name: Create a new user abc2019
+stages:
+  - name: post
+    request:
+      url: http://localhost:9000/api/users/all
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+  - name: post
+    request:
+      url: http://localhost:9000/api/users/Aleckie
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+  - name: register new user
+    request:
+      url: http://localhost:9000/api/users
+      json:
+        username: abc2019
+        full_name: Abc
+        password: password
+        email: abc@google.com
+        homeurl: google.com
+      method: POST
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
+  - name: post
+    request:
+      url: http://localhost:9000/api/users/abc2019
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+
+#Test Get call to get the newly added user abc2019
+# test_name: retrieve recently added user abc2019
+# stages:
+#   - name: post
+#     request:
+#       url: http://localhost:9000/api/users/abc2019
+#       method: GET
+#       headers:
+#         content-type: application/json
+#     response:
+#       status_code: 200

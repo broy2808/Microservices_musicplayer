@@ -1,0 +1,45 @@
+{
+    "username": "bony2019",
+    "full_name": "Bony Roy",
+    "password": "bonyroy",
+    "email": "bony@gmail.com",
+    "homeurl":"www.google.com"
+}
+{
+    "username": "bony2018",
+    "full_name": "Bony Roy 2",
+    "password": "bonyroy2",
+    "email": "bony2@gmail.com"
+}
+{
+    "username": "bony2019",
+    "password": "bonyroy"
+}
+{
+    "username": "bony2019",
+    "password_old": "bonyroy",
+    "password_new": "bonyroynew"
+}
+{
+    "trackurl": "track123",
+    "username": "bony2018",
+    "description": "My favourite track1!"
+}
+
+{
+    "trackurl": "trackurl1",
+    "username": "Aleckie",
+    "description": "My track1!"
+}
+{
+    "username": "Aleckie",
+    "password": "bonyroy"
+}
+
+{
+  "track_title": "Shape of you"
+  "album_title": "shape of you"
+  "artist": "Aleckie"
+  "track_length": "2.30"
+  "URL_media": "night.co"
+}

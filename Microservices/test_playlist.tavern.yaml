@@ -1,0 +1,40 @@
+#Test a GET call to get all playlist
+test_name: retrieve all playlist
+stages:
+  - name: get
+    request:
+      url: http://localhost:9003/recources/playlists/all
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+
+#Test Get, from playlist service
+test_name: retrieve playlist for a single user with username= Brandon
+stages:
+  - name: get
+    request:
+      url: http://localhost:9003/recources/playlists/Brandon
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+
+#A post call to add new playlist to playlist microservice
+test_name: Post a track and its description
+stages:
+  - name: post
+    request:
+      url: http://localhost:9003/recources/playlists
+      json:
+        playlist_title: Ed-sheren
+        URL_list: [\"Track1\",\"Track2\",\"Track3\",\"Track4\"]
+        username: Suramya
+        description: ed-playlist
+      method: POST
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
