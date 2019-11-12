@@ -41,20 +41,6 @@ INSERT INTO users(username,full_name,password,email,homeurl) VALUES('Williamgibs
 INSERT INTO users(username,full_name,password,email,homeurl) VALUES('Nealwalton', 'Neal Walton', '$2b$12$DbmIZ/a5LByoJHgFItyZCeIEHz9koaXCGjwc/fLJAPp5G6jmQvg4u', 'Neal@gmail.com','www.abc.com');
 
 
-DROP TABLE IF EXISTS tracks;
-CREATE TABLE tracks
-(
-    id INTEGER primary key,
-    track_title VARCHAR,
-    album_title VARCHAR,
-    artist VARCHAR,
-    track_length VARCHAR,
-    URL_media VARCHAR,
-    URL_artwork VARCHAR
-);
-
-INSERT INTO tracks(track_title,album_title,artist,track_length,URL_media,URL_artwork)
-VALUES("A Brief Interlude", "If It Were You We Would Never Leave", "Andrew Bayer","2:50", "/Users/brandontomich/Desktop/ProjectAPI/tracks/09 A Brief Interlude.mp3","");
 
 DROP TABLE IF EXISTS playlists;
 CREATE TABLE playlists
@@ -66,5 +52,4 @@ CREATE TABLE playlists
     description VARCHAR
 );
 
-INSERT INTO playlists(playlist_title,URL_list,username,description)
-VALUES("MyPlaylist", '["Track1","Track2","Track3","Track4"]', "Brandon","This Track is good");
+INSERT INTO playlists(playlist_title,URL_list,username,description) VALUES("MyPlaylist", '["Track1","Track2","Track3","Track4"]', "Brandon","This Track is good");

@@ -20,6 +20,7 @@
 import flask_api
 from flask import request
 from flask import jsonify
+from sqlite3 import dbapi2 as sqlite3
 from flask_api import exceptions, status
 import pugsql
 
