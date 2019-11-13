@@ -77,7 +77,10 @@ def init_db():
 def get_server_id(track_id):
     """return sharding for server"""
 
-    return track_id % 3
+    #return track_id % 3
+    print(track_id)
+    return (uuid.UUID(track_id).int) %3
+
 
 @app.teardown_appcontext
 def close_database(exception):
@@ -90,7 +93,16 @@ def close_database(exception):
     if hasattr(tracktop, 'track_db2'):
         tracktop.track_db2.close()
 
+def check_the_track(URL):
+    id1=0
 
+    for i in range(3):
+        db = get_db(i)
+        cur=db.execute('''SELECT id FROM tracks WHERE URL_media=?''',(URL,))
+        for row in cur:
+              id1=row[0]
+              return id1
+    return id1
 
 @app.route("/")
 def hello():
@@ -99,25 +111,30 @@ def hello():
 #need to also return URL of the newly-created object in the Location header field.
 @app.route("/recources/tracks", methods=['GET','POST'])
 def create_track():
-    required_fields = ['id','track_title','album_title','artist','track_length','URL_media']
+    required_fields = ['track_title','album_title','artist','track_length','URL_media']
     user_data = request.data
     if not all([field in user_data for field in required_fields]):
         raise exceptions.ParseError()
-    if (request.data.get('id')=="") or (request.data.get('track_title')=="") or (request.data.get('album_title')=="") or (request.data.get('artist')=="") or (request.data.get('track_length')=="") or (request.data.get('URL_media')==""):
-        return exceptions.ParseError()
 
-    server_id = get_server_id(request.data.get('id'))
+
+    if (request.data.get('track_title')=="") or (request.data.get('album_title')=="") or (request.data.get('artist')=="") or (request.data.get('track_length')=="") or (request.data.get('URL_media')==""):
+        return exceptions.ParseError()
+    id= uuid.uuid4()
+    server_id = get_server_id(str(id))
     db = get_db(server_id)
+    idexists=check_the_track(request.data.get('URL_media'))
+    if idexists!=0:
+       return {"Status":"Same track url already exists for one track!"}, status.HTTP_400_BAD_REQUEST
     if db.execute('''INSERT INTO tracks(id, track_title, album_title, artist, track_length, URL_media, URL_artwork) VALUES(?,?,?,?,?,?,?)''',
-            [request.data.get('id'), request.data.get('track_title'), request.data.get('album_title'), request.data.get('artist'),request.data.get('track_length'),request.data.get('URL_media'),request.data.get('URL_artwork')]):
+            [str(id), request.data.get('track_title'), request.data.get('album_title'), request.data.get('artist'),request.data.get('track_length'),request.data.get('URL_media'),request.data.get('URL_artwork')]):
         db.commit()
     #if queries.create_track(track_title= request.data.get('track_title'), album_title=request.data.get('album_title'), artist=request.data.get('artist'),track_length=request.data.get('track_length'),URL_media=request.data.get('URL_media'),URL_artwork=request.data.get('URL_artwork')):
-        return {"Status":status.HTTP_201_CREATED}, status.HTTP_201_CREATED
+        return {"Status":str(id)}, status.HTTP_201_CREATED
     else:
         return {"Status":status.HTTP_400_BAD_REQUEST}, status.HTTP_400_BAD_REQUEST
 
 #this method will simply route to modify, delete, or get and item based on its id
-@app.route("/recources/tracks/<int:id>", methods=['GET','PUT','DELETE'])
+@app.route("/recources/tracks/<id>", methods=['GET','PUT','DELETE'])
 def tracks(id):
     if request.method == 'PUT':
         return modify_track(id)

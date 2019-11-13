@@ -76,6 +76,12 @@ def create_playlist():
         raise exceptions.ParseError()
     if (request.data.get('playlist_title')=='') or (request.data.get('URL_list')=='') or (request.data.get('username')==''):
         raise exceptions.ParseError()
+    user = queries.user_by_id(id=request.data.get('username'))
+    if user:
+        pass
+    else:
+        return  {"Status":"User does not exists in user table!"}, status.HTTP_400_BAD_REQUEST
+
     if queries.create_playlist(playlist_title= request.data.get('playlist_title'), URL_list=str(request.data.get('URL_list')), username=request.data.get('username'), description=request.data.get('description')):
         return {"Status":status.HTTP_201_CREATED}, status.HTTP_201_CREATED
     else:
