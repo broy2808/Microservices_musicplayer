@@ -22,6 +22,7 @@ import os
 import time
 from sqlite3 import dbapi2 as sqlite3
 import uuid
+import json
 #from hashlib import md5
 #from datetime import datetime
 #from flask import Flask, request, jsonify, g, json, abort, Response, flash, _app_ctx_stack, session
@@ -33,18 +34,22 @@ app.config.from_envvar('APP_CONFIG')
 DATABASE0 = os.path.join(app.root_path, 'track0.db')
 DATABASE1 = os.path.join(app.root_path, 'track1.db')
 DATABASE2 = os.path.join(app.root_path, 'track2.db')
-SECRET_KEY = b'_5#y2L"F4Q8z\n\xec]/'
+#SECRET_KEY = b'_5#y2L"F4Q8z\n\xec]/'
+SECRET_KEY = b'_5#y2L"F4Q8z\n\xee]/'
 # default authenticated configuration
-app.config['BASIC_AUTH_USERNAME'] = 'admin'
-app.config['BASIC_AUTH_PASSWORD'] = 'admin123'
+app.config['BASIC_AUTH_USERNAME'] = 'bony'
+app.config['BASIC_AUTH_PASSWORD'] = 'bony123'
 #load all sql queries from queries directory
 #queries = pugsql.module('queries/')
 #connect to DB
 def get_db(server_id):
-    """Opens a new database connection if there is none yet for the  current application context.    """
+    """Open a database connection based on server id  """
     DATABASE = "DATABASE" + str(server_id)
     print(DATABASE)
+    """The internal LocalStack that holds AppContext instances...application context binds an application object implicitly to the current thread"""
     tracktop = _app_ctx_stack.top
+    """If the database connection is not initiated then initiate connection. We are using sqllite3 for the database connection."""
+    """detect_types in connect makes the sqlite3 module parse the declared type for each column it returns."""
     if not hasattr(tracktop, 'track_db0') and server_id == 0:
         tracktop.track_db0 = sqlite3.connect(app.config[DATABASE], detect_types=sqlite3.PARSE_DECLTYPES)
         tracktop.track_db0.row_factory = sqlite3.Row
@@ -54,7 +59,7 @@ def get_db(server_id):
     if not hasattr(tracktop, 'track_db2') and server_id == 2:
         tracktop.track_db2 = sqlite3.connect(app.config[DATABASE], detect_types=sqlite3.PARSE_DECLTYPES)
         tracktop.track_db2.row_factory = sqlite3.Row
-
+    """ check server id return the track database accordingly"""
     if server_id == 0:
         return tracktop.track_db0
     elif server_id == 1:
@@ -63,8 +68,13 @@ def get_db(server_id):
         return tracktop.track_db2
 #queries.connect(app.config['DATABASE_URL'])
 
+"""We need to run this command to initialize database connection. This inturn calls get_db and create all 3 databases if not created"""
 @app.cli.command('init')
 def init_db():
+    """
+    register_converter(): convert SQLite types to Python types
+    register_adapter(): convert Python types to SQLite types
+    """
     sqlite3.register_converter('GUID', lambda b: uuid.UUID(bytes_le=b))
     sqlite3.register_adapter(uuid.UUID, lambda u: buffer(u.bytes_le))
     for i in range(0,3):
@@ -74,9 +84,33 @@ def init_db():
         with app.open_resource('tracks.sql', mode='r') as f:
             db.cursor().executescript(f.read())
         db.commit()
+
+"""Populate db"""
+@app.cli.command('popdb')
+def pop_db():
+    file= os.path.join(app.root_path, 'populate.json')
+    with open(file) as json_file:
+       data = json.load(json_file)
+       for p in data:
+          print('guid :' + p['guid'])
+          print('track_title :' + p['track_title'])
+          print('album_title :' + p['album_title'])
+          print('artist :' + p['artist'])
+          print('track_length :' + p['track_length'])
+          print('URL_media :' + p['URL_media'])
+          server=get_server_id(str(p['guid']))
+          db = get_db(server)
+          if db.execute('''INSERT INTO tracks(id, track_title, album_title, artist, track_length, URL_media, URL_artwork) VALUES(?,?,?,?,?,?,?)''',
+                  [str(p['guid']), p['track_title'], p['album_title'], p['artist'],p['track_length'],p['URL_media'],'']):
+              db.commit()
+          else:
+              print("Error entering data!!")
+
+
+
+"""Get the Serverid based on track id provided"""
 def get_server_id(track_id):
     """return sharding for server"""
-
     #return track_id % 3
     print(track_id)
     return (uuid.UUID(track_id).int) %3
@@ -92,6 +126,7 @@ def close_database(exception):
         tracktop.track_db1.close()
     if hasattr(tracktop, 'track_db2'):
         tracktop.track_db2.close()
+
 
 def check_the_track(URL):
     id1=0
