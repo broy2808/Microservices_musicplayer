@@ -45,20 +45,31 @@ def init_db():
 def hello():
 	return "<h1>A Super awesome API that will allow you to create and listen to tracks/playlists over and over!</h1>"
 
-@app.route("/recources/playlists/<int:id>", methods=['GET','DELETE'])
+@app.route("/recources/playlists/<string:id>", methods=['GET','DELETE'])
 def playlists(id):
     if request.method == 'DELETE':
         return delete_playlist(id)
     elif request.method == 'GET':
         return get_playlist(id)
 
-#this method will return a playlist based off of its id
+#this method will return a playlist based off of its id: pls check this method everything works as expected and it's returning the list of values
 def get_playlist(id):
+
+    #returning a list, because earlier it was returning a string
     current_playlist = queries.search_by_id_playlists(id=id)
-    if current_playlist:
-        return current_playlist, status.HTTP_200_OK
-    else:
-        return {"Status":status.HTTP_404_NOT_FOUND}, status.HTTP_404_NOT_FOUND
+    track_lists = queries.playlist_tracks_by_id(playlist_id=id)
+    print(track_lists)
+    #print(current_playlist)
+    track_list = []
+    for tracks in track_lists:
+        track_list.append(tracks)
+
+    #    print(data)
+    current_playlist['track_list'] = track_list
+
+
+    #print("bye")
+    return current_playlist, status.HTTP_200_OK
 
 #this method will delete a playlist based off of its id
 def delete_playlist(id):
@@ -102,10 +113,3 @@ def get_user_playlist(username):
 #this method will pull all the playlists from the database
 #since the query returns an interable we can convert it to a list
 # if the list is empty then nothing was found else we return the list
-@app.route("/recources/playlists/all", methods=['GET'])
-def list_all_playlists():
-    all_playlists = list(queries.all_playlists())
-    if all_playlists != []:
-        return all_playlists, status.HTTP_200_OK
-    else:
-        return {"Status":status.HTTP_404_NOT_FOUND}, status.HTTP_404_NOT_FOUND
