@@ -11,27 +11,26 @@ CREATE TABLE tracksdesc(
     FOREIGN KEY(username) REFERENCES users(username),
     UNIQUE(trackurl,description,username)
 );
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co','My Favourite Track1','Suramya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co1','My Favourite Track1','Suramya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co2','My Favourite Track1','Suramya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co3','My Favourite Track1','Suramya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('trackurl1','My Favourite Track1','Jowalton');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co','My Favourite Track2','Bony');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co1','My Favourite Track2','Bony');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co2','My Favourite Track2','Bony');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co3','My Favourite Track2','Bony');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co','My Favourite Track3','Brandon');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co1','My Favourite Track3','Brandon');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co2','My Favourite Track3','Brandon');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co3','My Favourite Track3','Brandon');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co','My Favourite Track4','Shreya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co1','My Favourite Track4','Shreya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co2','My Favourite Track4','Shreya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co3','My Favourite Track4','Shreya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co','My Favourite Track5','Sudhir');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co1','My Favourite Track5','Sudhir');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co2','My Favourite Track5','Sudhir');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('night.co3','My Favourite Track5','Sudhir');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track1','Suramya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track1','Suramya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track1','Suramya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track1','Suramya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track2','Bony');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track2','Bony');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track2','Bony');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track2','Bony');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track3','Brandon');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track3','Brandon');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track3','Brandon');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track3','Brandon');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track4','Shreya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track4','Shreya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track4','Shreya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track4','Shreya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track5','Sudhir');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track5','Sudhir');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track5','Sudhir');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track5','Sudhir');
 
 
 DROP TABLE IF EXISTS users;
@@ -83,27 +82,27 @@ CREATE table playlist_tracks
   trackurl VARCHAR
 );
 
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(1, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(1, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(1, "http://127.0.0.1:9002/recources/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(1, "http://127.0.0.1:9002/recources/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(1, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(1, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(1, "http://localhost:8000/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(1, "http://localhost:8000/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
 
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(2, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(2, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(2, "http://127.0.0.1:9002/recources/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(2, "http://127.0.0.1:9002/recources/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(2, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(2, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(2, "http://localhost:8000/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(2, "http://localhost:8000/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
 
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(3, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(3, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(3, "http://127.0.0.1:9002/recources/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(3, "http://127.0.0.1:9002/recources/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(3, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(3, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(3, "http://localhost:8000/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(3, "http://localhost:8000/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
 
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(4, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(4, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(4, "http://127.0.0.1:9002/recources/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(4, "http://127.0.0.1:9002/recources/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(4, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(4, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(4, "http://localhost:8000/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(4, "http://localhost:8000/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
 
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(5, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(5, "http://127.0.0.1:9002/recources/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(5, "http://127.0.0.1:9002/recources/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
-INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(5, "http://127.0.0.1:9002/recources/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(5, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbadf");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(5, "http://localhost:8000/tracks/805944b7-b211-4e26-b74e-6c75d92cbabc");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(5, "http://localhost:8000/tracks/9944dd14-499a-4d64-8a78-62cc35205449");
+INSERT INTO playlist_tracks(playlist_id, trackurl) VALUES(5, "http://localhost:8000/tracks/1000dd14-499a-4d64-8a78-62cc35205455");
