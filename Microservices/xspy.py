@@ -31,7 +31,7 @@ def playlists(id):
 
     #using requests module
 
-    r = requests.get("http://127.0.0.1:9003/recources/playlists/"+id)
+    r = requests.get("http://localhost:8000/playlists/"+id)
 
     r= r.json()
 
@@ -42,7 +42,7 @@ def playlists(id):
     x.title=r['playlist_title']
     username = r['username']
 
-    user_details = requests.get("http://127.0.0.1:9000/api/users/"+username)
+    user_details = requests.get("http://localhost:8000/users/"+username)
     user_details=user_details.json()
     #x.creator=user_details['full_name']
     print(user_details)
@@ -60,7 +60,7 @@ def playlists(id):
         print(track_details)
         print(track_details['track_title'])
         #requesting the description microservice to fetch the track's description
-        user_desc=requests.get("http://127.0.0.1:9001/api/users/gettrackdesc/"+username+'/'+track_details['URL_media'])
+        user_desc=requests.get("http://localhost:8000/description/users/gettrackdesc/"+username+'/'+track_details['URL_media'])
         user_desc=user_desc.json()
         print(track_details['URL_media'])
         print(user_desc)
