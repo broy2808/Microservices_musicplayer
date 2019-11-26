@@ -60,7 +60,7 @@ def playlists(id):
         print(track_details)
         print(track_details['track_title'])
         #requesting the description microservice to fetch the track's description
-        user_desc=requests.get("http://localhost:8000/description/users/gettrackdesc/"+username+'/'+track_details['URL_media'])
+        user_desc=requests.get("http://localhost:8000/description/"+username+'/'+track_details['URL_media'])
         user_desc=user_desc.json()
         print(track_details['URL_media'])
         print(user_desc)
