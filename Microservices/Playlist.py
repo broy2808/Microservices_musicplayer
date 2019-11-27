@@ -52,24 +52,20 @@ def playlists(id):
     elif request.method == 'GET':
         return get_playlist(id)
 
-#this method will return a playlist based off of its id: pls check this method everything works as expected and it's returning the list of values
+#this method will return a playlist based off of its id
 def get_playlist(id):
-
     #returning a list, because earlier it was returning a string
     current_playlist = queries.search_by_id_playlists(id=id)
     track_lists = queries.playlist_tracks_by_id(playlist_id=id)
-    print(track_lists)
-    #print(current_playlist)
-    track_list = []
-    for tracks in track_lists:
-        track_list.append(tracks)
+    if current_playlist:
+        track_list = []
+        for tracks in track_lists:
+            track_list.append(tracks)
+            current_playlist['track_list'] = track_list
+            return current_playlist, status.HTTP_200_OK
 
-    #    print(data)
-    current_playlist['track_list'] = track_list
-
-
-    #print("bye")
-    return current_playlist, status.HTTP_200_OK
+    else:
+        return  {"Status":"Playlist ID does not exists in database! Please check with the existing ID's 1,2,3,4,5"}, status.HTTP_400_BAD_REQUEST
 
 #this method will delete a playlist based off of its id
 def delete_playlist(id):
