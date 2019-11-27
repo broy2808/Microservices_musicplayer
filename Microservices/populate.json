@@ -5,7 +5,7 @@
   "album_title": "shape of you",
   "artist": "Aleckie",
   "track_length": "2.30",
-  "URL_media": "http://localhost:9000/media/file1.m4a"
+  "URL_media": "file1.m4a"
 },
 {
   "guid":"805944b7-b211-4e26-b74e-6c75d92cbabc",
@@ -13,7 +13,7 @@
   "album_title": "shape of you 2",
   "artist": "Aleckie",
   "track_length": "2.30",
-  "URL_media": "http://localhost:9000/media/file2.mp3"
+  "URL_media": "file2.mp3"
 }
 ,
 {
@@ -22,7 +22,7 @@
   "album_title": "shape of you 3",
   "artist": "Aleckie",
   "track_length": "2.30",
-  "URL_media": "http://localhost:9000/media/file3.mp3"
+  "URL_media": "file3.mp3"
 }
 ,
 {
@@ -31,6 +31,6 @@
   "album_title": "shape of you 4",
   "artist": "Aleckie",
   "track_length": "2.30",
-  "URL_media": "http://localhost:9000/media/file4.mp3"
+  "URL_media": "file4.mp3"
 }
 ]
