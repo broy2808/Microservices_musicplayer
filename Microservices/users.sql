@@ -11,26 +11,26 @@ CREATE TABLE tracksdesc(
     FOREIGN KEY(username) REFERENCES users(username),
     UNIQUE(trackurl,description,username)
 );
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track1','Suramya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track1','Suramya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track1','Suramya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track1','Suramya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track2','Bony');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track2','Bony');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track2','Bony');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track2','Bony');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track3','Brandon');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track3','Brandon');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track3','Brandon');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track3','Brandon');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track4','Shreya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track4','Shreya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track4','Shreya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track4','Shreya');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file1.m4a','My Favourite Track5','Sudhir');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file2.mp3','My Favourite Track5','Sudhir');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file3.mp3','My Favourite Track5','Sudhir');
-INSERT INTO tracksdesc(trackurl,description,username) VALUES('http://localhost:9000/media/file4.mp3','My Favourite Track5','Sudhir');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file1.m4a','My Favourite Track1','Suramya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file2.mp3','My Favourite Track1','Suramya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file3.mp3','My Favourite Track1','Suramya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file4.mp3','My Favourite Track1','Suramya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file1.m4a','My Favourite Track2','Bony');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file2.mp3','My Favourite Track2','Bony');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file3.mp3','My Favourite Track2','Bony');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file4.mp3','My Favourite Track2','Bony');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file1.m4a','My Favourite Track3','Brandon');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file2.mp3','My Favourite Track3','Brandon');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file3.mp3','My Favourite Track3','Brandon');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file4.mp3','My Favourite Track3','Brandon');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file1.m4a','My Favourite Track4','Shreya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file2.mp3','My Favourite Track4','Shreya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file3.mp3','My Favourite Track4','Shreya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file4.mp3','My Favourite Track4','Shreya');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file1.m4a','My Favourite Track5','Sudhir');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file2.mp3','My Favourite Track5','Sudhir');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file3.mp3','My Favourite Track5','Sudhir');
+INSERT INTO tracksdesc(trackurl,description,username) VALUES('file4.mp3','My Favourite Track5','Sudhir');
 
 
 DROP TABLE IF EXISTS users;
