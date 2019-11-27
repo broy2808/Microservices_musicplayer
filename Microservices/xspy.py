@@ -62,13 +62,13 @@ def playlists(id):
         #requesting the description microservice to fetch the track's description
         user_desc=requests.get("http://localhost:8000/description/"+username+'/'+track_details['URL_media'])
         user_desc=user_desc.json()
-        print(track_details['URL_media'])
         print(user_desc)
         #{'night.co3': {'description': 'My Favourite Track1'}}
         # y= user_desc[track_details['URL_media']]
         # x.annotation=y['description']
+        y="http://localhost:9000/media/"+track_details['URL_media']
 
-        x.add_track(annotation= user_desc[track_details['URL_media']]['description'], title=track_details['track_title'], creator=track_details['artist'], duration= track_details['track_length'], album=track_details['album_title'], identifier=track_details['URL_media'])
+        x.add_track(annotation= user_desc[track_details['URL_media']]['description'], title=track_details['track_title'], creator=track_details['artist'], duration= track_details['track_length'], album=track_details['album_title'], identifier=y)
 
 # {'id': 1, 'playlist_title': 'MyPlaylist', 'URL_list': '["Track1","Track2","Track3","Track4"]', 'username': 'Brandon', 'description': 'This Track is good'}
 
