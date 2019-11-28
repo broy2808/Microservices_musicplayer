@@ -60,12 +60,14 @@ def get_playlist(id):
     if current_playlist:
         track_list = []
         for tracks in track_lists:
+            print(tracks)
             track_list.append(tracks)
             current_playlist['track_list'] = track_list
-            return current_playlist, status.HTTP_200_OK
+        return current_playlist, status.HTTP_200_OK
 
     else:
         return  {"Status":"Playlist ID does not exists in database! Please check with the existing ID's 1,2,3,4,5"}, status.HTTP_400_BAD_REQUEST
+
 
 #this method will delete a playlist based off of its id
 def delete_playlist(id):
