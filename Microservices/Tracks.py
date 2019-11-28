@@ -1,18 +1,18 @@
 #README
 #Tracks methods
 
-#To create a track use the URL http://127.0.0.1:5000/recources/tracks
+#To create a track use the URL http://127.0.0.1:9000/recources/tracks
 #Arguments- in json format - track_title: newTitle, album_title: newAlbumTitle, artist:newArtist, track_length:newLength, URL_media:newMedia (URL_media not required)
 
-#To retrieve a track use use URL GET http://127.0.0.1:5000/recources/tracks/<int:id>
-#Arguments - in URL - an integer representing the ID of a given track
+#To retrieve a track use use URL GET http://127.0.0.1:9000/recources/tracks/<GUID:id>
+#Arguments - in URL -GUID  representing the ID of a given track
 
-#To edit a Track use URL PUT http://127.0.0.1:5000/recources/tracks/<int:id>
+#To edit a Track use URL PUT http://127.0.0.1:9000/recources/tracks/<GUID:id>
 #Arguments - in URL - an integer representing the ID of a given track
 #Arguments - in json format - track_title:newTrackTitle
 
-#To Delete a Track use URL DELETE http://127.0.0.1:5000/recources/tracks/<int:id>
-#Arguments - in URL - an integer representing the ID of a given track
+#To Delete a Track use URL DELETE http://127.0.0.1:9000/recources/tracks/<GUID:id>
+#Arguments - in URL - an GUID representing the ID of a given track
 
 import flask_api
 from flask import request, jsonify,_app_ctx_stack
@@ -23,9 +23,7 @@ import time
 from sqlite3 import dbapi2 as sqlite3
 import uuid
 import json
-#from hashlib import md5
-#from datetime import datetime
-#from flask import Flask, request, jsonify, g, json, abort, Response, flash, _app_ctx_stack, session
+
 
 app = flask_api.FlaskAPI(__name__)
 app.config["DEBUG"] = True
@@ -34,7 +32,7 @@ app.config.from_envvar('APP_CONFIG')
 DATABASE0 = os.path.join(app.root_path, 'track0.db')
 DATABASE1 = os.path.join(app.root_path, 'track1.db')
 DATABASE2 = os.path.join(app.root_path, 'track2.db')
-#SECRET_KEY = b'_5#y2L"F4Q8z\n\xec]/'
+
 SECRET_KEY = b'_5#y2L"F4Q8z\n\xee]/'
 # default authenticated configuration
 app.config['BASIC_AUTH_USERNAME'] = 'bony'
@@ -146,27 +144,31 @@ def hello():
 #need to also return URL of the newly-created object in the Location header field.
 @app.route("/recources/tracks", methods=['GET','POST'])
 def create_track():
-    required_fields = ['track_title','album_title','artist','track_length','URL_media']
-    user_data = request.data
-    if not all([field in user_data for field in required_fields]):
-        raise exceptions.ParseError()
+
+       if request.method=='POST':
+            required_fields = ['track_title','album_title','artist','track_length','URL_media']
+            user_data = request.data
+            if not all([field in user_data for field in required_fields]):
+                raise exceptions.ParseError()
 
 
-    if (request.data.get('track_title')=="") or (request.data.get('album_title')=="") or (request.data.get('artist')=="") or (request.data.get('track_length')=="") or (request.data.get('URL_media')==""):
-        return exceptions.ParseError()
-    id= uuid.uuid4()
-    server_id = get_server_id(str(id))
-    db = get_db(server_id)
-    idexists=check_the_track(request.data.get('URL_media'))
-    if idexists!=0:
-       return {"Status":"Same track url already exists for one track!"}, status.HTTP_400_BAD_REQUEST
-    if db.execute('''INSERT INTO tracks(id, track_title, album_title, artist, track_length, URL_media, URL_artwork) VALUES(?,?,?,?,?,?,?)''',
-            [str(id), request.data.get('track_title'), request.data.get('album_title'), request.data.get('artist'),request.data.get('track_length'),request.data.get('URL_media'),request.data.get('URL_artwork')]):
-        db.commit()
-    #if queries.create_track(track_title= request.data.get('track_title'), album_title=request.data.get('album_title'), artist=request.data.get('artist'),track_length=request.data.get('track_length'),URL_media=request.data.get('URL_media'),URL_artwork=request.data.get('URL_artwork')):
-        return {"Status":str(id)}, status.HTTP_201_CREATED
-    else:
-        return {"Status":status.HTTP_400_BAD_REQUEST}, status.HTTP_400_BAD_REQUEST
+            if (request.data.get('track_title')=="") or (request.data.get('album_title')=="") or (request.data.get('artist')=="") or (request.data.get('track_length')=="") or (request.data.get('URL_media')==""):
+                return exceptions.ParseError()
+            id= uuid.uuid4()
+            server_id = get_server_id(str(id))
+            db = get_db(server_id)
+            idexists=check_the_track(request.data.get('URL_media'))
+            if idexists!=0:
+               return {"Status":"Same track url already exists for one track!"}, status.HTTP_400_BAD_REQUEST
+            if db.execute('''INSERT INTO tracks(id, track_title, album_title, artist, track_length, URL_media, URL_artwork) VALUES(?,?,?,?,?,?,?)''',
+                    [str(id), request.data.get('track_title'), request.data.get('album_title'), request.data.get('artist'),request.data.get('track_length'),request.data.get('URL_media'),request.data.get('URL_artwork')]):
+                db.commit()
+            #if queries.create_track(track_title= request.data.get('track_title'), album_title=request.data.get('album_title'), artist=request.data.get('artist'),track_length=request.data.get('track_length'),URL_media=request.data.get('URL_media'),URL_artwork=request.data.get('URL_artwork')):
+                return {"Status":str(id)}, status.HTTP_201_CREATED
+            else:
+                return {"Status":status.HTTP_400_BAD_REQUEST}, status.HTTP_400_BAD_REQUEST
+       else:
+           return {"Status":status.HTTP_204_NO_CONTENT}, status.HTTP_204_NO_CONTENT
 
 #this method will simply route to modify, delete, or get and item based on its id
 @app.route("/recources/tracks/<id>", methods=['GET','PUT','DELETE'])
