@@ -13,11 +13,13 @@ from flask import request, jsonify
 #from pymemcache.client import base
 import pymemcache
 from pymemcache.client import base
+from pymemcache import serde
 #from pymemcache.client.base import Client
 import requests
 import xspf
 from flask import Flask
 app = Flask(__name__)
+import json
 
 
 @app.route("/")
@@ -38,7 +40,7 @@ def do_user_query(username):
 @app.route("/xspf/playlist.xspf/<string:id>")
 def playlists(id):
     #instantiating the client
-    client = base.Client(('localhost', 11211))
+    client = base.Client(('localhost', 11211),serializer=serde.python_memcache_serializer,deserializer=serde.python_memcache_deserializer)
     #now client object started on port 11211
     #store the key-value pair!
     result = client.get(id)
@@ -71,14 +73,16 @@ def playlists(id):
 
         #store the JSON response in Memcached with expiration of atleast 60 sec
         result['track_list']=l1
-        client.append(id, result, 100)
+        client.set(id, result, 100)
+        #client.append(id, result, 100)
         #print("the json objects are not properly appended!")
         #print("please check how I am appending the json objects to store in cache")
     #if the cached object exists: use its value(result) to construct the xspf!
     x= xspf.Xspf()
 
-    print(result)
+    print("Hello ",result)
     #using result json object to construct the xspf
+
     x.title=result['playlist_title']
     x.creator=result['username']['full_name']
     x.info=result['username']['email']
@@ -87,6 +91,7 @@ def playlists(id):
     #each playlist of user has multiple tracks such as file1, file2, file3,file4.mp3
     for track in trackList:
         tr1=xspf.Track()
+        
         tr1.title=track['track_title']
         tr1.creator=track['artist']
         tr1.duration=track['track_length']
